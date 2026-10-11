@@ -1,0 +1,33 @@
+# Build output
+bin/
+obj/
+dist/
+*.yak
+*.locked-*
+
+# IDE
+.vs/
+*.user
+*.code-workspace
+
+# Rhino working files (backup written on save, lock held while open)
+*.3dmbak
+*.rhl
+
+# Local working folders and machine helpers (not portable)
+.support/
+.archive/
+.tmp/
+task.bat
+*.loop.log
+.claude/settings.local.json
+
+# Test output (reports, captures, logs)
+tests/artifacts/
+
+# Dot paths that belong to the project, kept trackable where dot files are
+# ignored globally. Everything else under .github/ stays local.
+!.gitignore
+!.github/
+.github/*
+!.github/workflows/
