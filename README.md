@@ -1,5 +1,7 @@
 # 44 View for Rhino
 
+> `Ctrl + click` to visit [rhino3d 44 view docs](https://jhauga.github.io/rhino3d-44-view/)
+
 A Rhino 8 command that brings back the four default viewports with the model
 fitted in every one of them. `44View` restores the Top, Front, Right and
 Perspective layout, frames the model in the three parallel views at one shared
