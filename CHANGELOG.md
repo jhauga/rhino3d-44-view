@@ -26,7 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `rs.GetPlugInObject("FourFourView")`.
 - Unit tests for the fit math, and smoke and regression suites that run inside
   Rhino and measure the fitted viewports.
-- Plugin icon, logo, banner, demo animation and a documentation site.
+- Plugin icon, logo, banner, demo animation, and a documentation site with a
+  matching favicon.
 - Build workflow that builds and unit-tests every push and packages version
   tags with yak, and a workflow that publishes the documentation site.
 

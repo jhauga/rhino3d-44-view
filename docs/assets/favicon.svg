@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="tile">
+    <rect width="16" height="16" rx="3" fill="#24324A"/>
+  </g>
+  <g id="cells" fill="#F4F7FB">
+    <rect id="cell-top" x="1" y="1" width="6" height="6" rx="1"/>
+    <rect id="cell-perspective" x="9" y="1" width="6" height="6" rx="1"/>
+    <rect id="cell-front" x="1" y="9" width="6" height="6" rx="1"/>
+    <rect id="cell-right" x="9" y="9" width="6" height="6" rx="1"/>
+  </g>
+  <g id="box-parallel" fill="#D9732B">
+    <rect id="box-top" x="2" y="3" width="4" height="2"/>
+    <rect id="box-front" x="2" y="11" width="4" height="2"/>
+    <rect id="box-right" x="11" y="11" width="2" height="2"/>
+  </g>
+  <g id="box-perspective">
+    <polygon id="face-top" points="10,3 12,2 14,3 12,4" fill="#EE9A55"/>
+    <polygon id="face-front" points="10,3 12,4 12,6 10,5" fill="#D9732B"/>
+    <polygon id="face-side" points="12,4 14,3 14,5 12,6" fill="#B95A1A"/>
+  </g>
+</svg>
