@@ -31,4 +31,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build workflow that builds and unit-tests every push and packages version
   tags with yak, and a workflow that publishes the documentation site.
 
-[1.0.0-alpha.0.0.0]: https://github.com/jhauga/rhino3d-44-view/commits/main
+[1.0.0-alpha.0.0.0]: https://github.com/jhauga/rhino3d-44-view/releases/tag/v1.0.0-alpha.0.0.0

@@ -67,8 +67,11 @@ versions install only when someone asks for them by version.
 
 Pushing a tag that starts with `v`, such as `v1.0.0-alpha.0.0.0`, runs the
 Build workflow's package job: it builds the plugin, runs `yak build`, and
-attaches the package to a GitHub release. Versions with a suffix become
-prereleases. The workflow never pushes to the package server.
+attaches the package to the tag's GitHub release. A release already posted for
+the tag, for example with the changelog section as its notes, keeps its notes
+and gets the package added; otherwise the job creates the release with
+generated notes. Versions with a suffix are marked as prereleases. The
+workflow never pushes to the package server.
 
 ## Food4Rhino
 

@@ -2,8 +2,9 @@ name: Build
 
 # Builds the plugin and runs the unit tests on every push and pull request. A
 # version tag (v*) also packages the plugin with yak and attaches the package
-# to a GitHub release. Publishing to the Rhino package server stays a manual
-# step. The in-Rhino test suites need Rhino and do not run here.
+# to the tag's GitHub release, creating the release when none was posted yet.
+# Publishing to the Rhino package server stays a manual step. The in-Rhino test
+# suites need Rhino and do not run here.
 on:
   push:
     branches: [main]
@@ -80,6 +81,20 @@ jobs:
         run: |
           $package = Get-ChildItem dist -Filter *.yak | Select-Object -First 1
           if (-not $package) { throw "yak build produced no package" }
-          $flags = @('--generate-notes')
-          if ($env:GITHUB_REF_NAME -like '*-*') { $flags += '--prerelease' }
-          gh release create $env:GITHUB_REF_NAME $package.FullName @flags
+          $tag = $env:GITHUB_REF_NAME
+          $prerelease = $tag -like '*-*'
+          gh release view $tag *> $null
+          if ($LASTEXITCODE -eq 0) {
+            # A release posted for the tag already has its own notes: add the package to it.
+            gh release upload $tag $package.FullName --clobber
+            if ($LASTEXITCODE -ne 0) { throw "could not attach the package to release $tag" }
+            if ($prerelease) {
+              gh release edit $tag --prerelease
+              if ($LASTEXITCODE -ne 0) { throw "could not mark release $tag as a prerelease" }
+            }
+          } else {
+            $flags = @('--generate-notes')
+            if ($prerelease) { $flags += '--prerelease' }
+            gh release create $tag $package.FullName @flags
+            if ($LASTEXITCODE -ne 0) { throw "could not create release $tag" }
+          }
