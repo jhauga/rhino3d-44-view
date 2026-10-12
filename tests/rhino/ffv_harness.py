@@ -344,6 +344,44 @@ class SettingsGuard(object):
             self.settings.SetBool("Layout", self.saved["Layout"])
 
 
+# ---- Main window ------------------------------------------------------------
+
+
+class WindowGuard(object):
+    """
+    Maximizes Rhino's main window for the run and puts it back afterwards. The
+    viewports then have the same size on every run, whatever size Rhino was
+    last left at, and the screen copies come out at full size. Best effort:
+    when the main window cannot be reached, it stays as it is.
+    """
+
+    def __init__(self, context):
+        self.context = context
+        self.window = None
+        self.previous = None
+
+    def maximize(self):
+        try:
+            import Rhino.UI
+            import Eto.Forms
+            window = Rhino.UI.RhinoEtoApp.MainWindow
+            self.previous = window.WindowState
+            window.WindowState = Eto.Forms.WindowState.Maximized
+            self.window = window
+        except Exception:
+            self.context.log("window not maximized: " + traceback.format_exc().strip().splitlines()[-1])
+        self.context.pump()
+
+    def restore(self):
+        if self.window is None:
+            return
+        try:
+            self.window.WindowState = self.previous
+        finally:
+            self.window = None
+            self.context.pump()
+
+
 # ---- Captures ---------------------------------------------------------------
 
 

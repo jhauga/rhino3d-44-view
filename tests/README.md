@@ -31,6 +31,10 @@ template into `tests/artifacts/`, starts Rhino 8 on the copy with
 results, so the report decides pass or fail. Everything a run writes lands in
 `tests/artifacts/`, which is not committed.
 
+Rhino's window is maximized while the suites run and put back when they end.
+The viewports then have the same size on every run, whatever size Rhino was
+last left at, and the screen copies come out at full size.
+
 The default template is Rhino's small-objects millimeter template; pass
 `-Template` to start from another. Keep the repository in a folder whose path
 has no spaces: the runner passes the test script's path to Rhino's
@@ -95,9 +99,10 @@ view, kept through the layout even when a view was maximized or closed.
 | `before-screen.png`, `after-screen.png` | The four viewports copied from the screen, with Rhino's own titles and borders |
 | `display-modes-screen.png` | The four viewports copied from the screen after `44View`, each in a different display mode |
 
-The runner assembles `before.png` and `after.png` with ImageMagick when
-`magick` is on the PATH. The screen copies need a visible Rhino window and are
-skipped otherwise. Pictures are for looking at and for the documentation; the
+The before and after pictures show the Perspective view in Shaded. The runner
+assembles `before.png` and `after.png` with ImageMagick when `magick` is on the
+PATH. The screen copies need a visible Rhino window and are skipped
+otherwise. Pictures are for looking at and for the documentation; the
 assertions decide whether a run passes.
 
 ## Why the in-Rhino suites are written this way

@@ -6,10 +6,11 @@ Launched by tests/run-tests.ps1 as:
 
     Rhino.exe "<copy of a template>.3dm" /nosplash /netcore /runscript="-_RunPythonScript <this file>"
 
-It loads the plugin, sets the plugin's saved options aside, runs the requested
-suites, writes tests/artifacts/rhino-report.json and a readable log beside it,
-puts the saved options back, and closes Rhino. Rhino's exit code says nothing
-about the results, so the launcher reads the report.
+It loads the plugin, sets the plugin's saved options aside, maximizes Rhino's
+window, runs the requested suites, writes tests/artifacts/rhino-report.json and
+a readable log beside it, puts the window and the saved options back, and
+closes Rhino. Rhino's exit code says nothing about the results, so the launcher
+reads the report.
 
 Environment variables:
     FFV_TESTS_DIR   the tests folder (falls back to this file's location)
@@ -101,6 +102,7 @@ def main():
     report = {"ok": False, "counts": {"passed": 0, "failed": 0, "error": 0},
               "total": 0, "results": [], "artifacts": []}
     guard = None
+    window = None
 
     try:
         import ffv_harness as h
@@ -112,6 +114,8 @@ def main():
 
         context = h.Context(doc, plugin_object, TESTS, LOG_PATH)
         context.state["guard"] = guard
+        window = h.WindowGuard(context)
+        window.maximize()
         context.log("44 View in-Rhino tests")
         context.log("rhino          : %s" % Rhino.RhinoApp.Version)
         context.log("plugin version : %s" % plugin_object.Version)
@@ -145,6 +149,11 @@ def main():
         append_log(traceback.format_exc())
 
     finally:
+        try:
+            if window is not None:
+                window.restore()
+        except Exception:
+            append_log("could not put the window back:\n" + traceback.format_exc())
         try:
             if guard is not None:
                 guard.restore()

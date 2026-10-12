@@ -177,6 +177,23 @@ def all_states(context):
     return dict((name, h.camera_state(h.view(context.doc, name).MainViewport)) for name in h.VIEW_NAMES)
 
 
+def display_modes():
+    """Rhino's display modes by English name."""
+    return dict((str(mode.EnglishName), mode) for mode in Rhino.Display.DisplayModeDescription.GetDisplayModes())
+
+
+def display_mode_name(context, name):
+    return str(h.view(context.doc, name).MainViewport.DisplayMode.EnglishName)
+
+
+def shade_perspective(context):
+    """The pictures show the Perspective view in Shaded."""
+    mode = display_modes().get("Shaded")
+    h.not_none(mode, "the Shaded display mode is not available")
+    h.view(context.doc, "Perspective").MainViewport.DisplayMode = mode
+    context.pump()
+
+
 # ---- Cases, in the order they run -------------------------------------------
 
 
@@ -205,6 +222,7 @@ def demo_model(context):
 
 @SUITE.case("before picture: the built-in 4View")
 def builtin_4view(context):
+    shade_perspective(context)
     for attempt in (1, 2):
         outcome = context.run("_-4View _Enter")
         h.ok(outcome["ran"], "the built-in 4View did not run")
@@ -224,6 +242,7 @@ def save_views_off(context):
 
 @SUITE.case("after picture: 44View with the default options fits, centers and aligns the four views")
 def default_fit(context):
+    shade_perspective(context)
     outcome = context.run("_44View")
     h.capture_views(context, "after")
     h.capture_screen(context, "after")
@@ -392,14 +411,13 @@ def layout_off(context):
 
 def check_display_modes(context, wanted, when):
     for name, mode in sorted(wanted.items()):
-        got = str(h.view(context.doc, name).MainViewport.DisplayMode.EnglishName)
-        h.equal(got, mode, "%s display mode %s" % (name, when))
+        h.equal(display_mode_name(context, name), mode, "%s display mode %s" % (name, when))
 
 
 @SUITE.case("each view keeps its display mode, also when the layout is rebuilt")
 def keeps_display_modes(context):
     doc = context.doc
-    available = dict((str(mode.EnglishName), mode) for mode in Rhino.Display.DisplayModeDescription.GetDisplayModes())
+    available = display_modes()
     wanted = {"Top": "Shaded", "Front": "Ghosted", "Right": "X-Ray", "Perspective": "Rendered"}
     for mode in wanted.values():
         h.ok(mode in available, "the %s display mode is not available" % mode)
