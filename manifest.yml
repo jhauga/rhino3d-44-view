@@ -1,0 +1,22 @@
+# Package manifest for the Rhino package server (yak). The package build copies
+# this file and docs/assets/icon.png into dist/ before running yak build, so the
+# icon path resolves against the root of the package.
+name: 44-view
+version: 1.0.0-alpha.0.0.0
+authors:
+  - John Haugabook
+description: >
+  One command, 44View, that restores Rhino's four default viewports, fits the
+  model in each at one shared scale so the grids line up across views, and
+  saves the four cameras as named views.
+url: "https://github.com/jhauga/rhino3d-44-view"
+keywords:
+  - viewport
+  - layout
+  - zoom
+  - extents
+  - named-views
+  - 4view
+  - camera
+  - fit
+icon: icon.png
