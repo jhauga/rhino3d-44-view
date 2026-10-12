@@ -32,3 +32,5 @@ The command line confirms what was fitted:
 
 The source code, issues and releases are on
 [GitHub](https://github.com/jhauga/rhino3d-44-view).
+
+Announcement: <https://gist.github.com/jhauga/c165fd2f748a4f72c04dcefde9b0cea3>

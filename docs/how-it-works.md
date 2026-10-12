@@ -22,7 +22,8 @@ To fit its two sides with the padding around them, a view needs a scale of at
 least:
 
 ```text
-required = larger of (across x border / viewport width, up x border / viewport height)
+required = larger of (across x border / viewport width,
+                      up x border / viewport height)
 ```
 
 The scale is in model units per pixel, and the border is 1 plus the padding as

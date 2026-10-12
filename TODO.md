@@ -57,6 +57,8 @@ Task-level tracking for 44 View. Higher-level direction lives in
 ## Testing
 
 - [ ] Run the in-Rhino suites in CI on a self-hosted runner with Rhino
+- [ ] Move the workflows to action versions that run on Node.js 24; GitHub
+      warns that the v4 actions in use target Node.js 20
 - [ ] Add a run with a non-English Rhino
 - [ ] Measure the time on a model with hundreds of objects
 

@@ -129,6 +129,8 @@ The documentation site is <https://jhauga.github.io/rhino3d-44-view/>:
 installation, usage, how the fit works, publishing and the roadmap. The same
 pages live in [docs/](docs/).
 
+Announcement: <https://gist.github.com/jhauga/c165fd2f748a4f72c04dcefde9b0cea3>
+
 ## Tests
 
 `powershell -File tests\run-tests.ps1` runs three suites: unit tests of the fit
