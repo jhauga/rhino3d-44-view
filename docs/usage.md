@@ -8,7 +8,9 @@ Type `44View`. In one step it:
    selected.
 2. Restores the four default viewports: Top at the upper left, Perspective at
    the upper right, Front at the lower left and Right at the lower right. A
-   closed or maximized view comes back as well.
+   closed or maximized view comes back as well. Each view keeps the display
+   mode it had, such as Wireframe, Shaded or Rendered; a view that was closed
+   comes back in Wireframe.
 3. Fits Top, Front and Right at one shared scale, each centered on the model,
    with the margin Rhino's Zoom Extents leaves.
 4. Fits the Perspective view in its default direction so the whole model is in

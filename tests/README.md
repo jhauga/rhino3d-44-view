@@ -82,8 +82,9 @@ result with the plugin's report:
 Then one case each covers an empty model, a fit that does not save named
 views, a repeated fit, options set from a `-44View` macro, a selection with
 and without the Auto source, an empty selection, zero padding, hidden and
-locked objects and block instances, a flat curve, a single point, and a fit
-that keeps the current viewport arrangement.
+locked objects and block instances, a flat curve, a single point, a fit that
+keeps the current viewport arrangement, and a different display mode in each
+view, kept through the layout even when a view was maximized or closed.
 
 ## Pictures
 
@@ -92,6 +93,7 @@ that keeps the current viewport arrangement.
 | `before.png` | The demo model after the built-in `4View`: the four view captures arranged like the viewports, labelled, under a title strip |
 | `after.png` | The same after `44View` |
 | `before-screen.png`, `after-screen.png` | The four viewports copied from the screen, with Rhino's own titles and borders |
+| `display-modes-screen.png` | The four viewports copied from the screen after `44View`, each in a different display mode |
 
 The runner assembles `before.png` and `after.png` with ImageMagick when
 `magick` is on the PATH. The screen copies need a visible Rhino window and are

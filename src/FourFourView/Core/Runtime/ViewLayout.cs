@@ -40,6 +40,18 @@ namespace FourFourView.Core.Runtime
         RhinoApp.Wait();
       }
 
+      var views = FindFourViews(doc, layout);
+      missing = FirstMissing(views);
+      return missing == null ? views : null;
+    }
+
+    /// <summary>
+    /// Finds Top, Front, Right and Perspective among the current views without changing
+    /// anything; a view that cannot be found is null. With <paramref name="allowPosition"/>,
+    /// views missing by name are identified by their place in a two by two arrangement.
+    /// </summary>
+    public static FourViews FindFourViews(RhinoDoc doc, bool allowPosition)
+    {
       var standard = doc.Views.GetStandardRhinoViews() ?? Array.Empty<RhinoView>();
       var views = new FourViews
       {
@@ -49,14 +61,13 @@ namespace FourFourView.Core.Runtime
         Perspective = ByName(standard, "Perspective"),
       };
 
-      // A localized Rhino names the views in its own language. A fresh four-view layout
+      // A localized Rhino names the views in its own language. The four-view layout
       // always puts Top at the upper left, Perspective at the upper right, Front at the
       // lower left and Right at the lower right, so position identifies them instead.
-      if (layout && FirstMissing(views) != null)
+      if (allowPosition && FirstMissing(views) != null)
         views = ByPosition(standard) ?? views;
 
-      missing = FirstMissing(views);
-      return missing == null ? views : null;
+      return views;
     }
 
     /// <summary>The pixel size of the three parallel viewports.</summary>

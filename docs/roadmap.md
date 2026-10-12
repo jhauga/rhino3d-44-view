@@ -10,10 +10,11 @@ has been checked on real models.
 The command does what it sets out to do. `44View` restores the four default
 viewports, including a closed or maximized one, fits Top, Front and Right at
 one shared scale centered on the model, fits Perspective, and saves and shows
-the four named views. The options work from the prompt, from macros and from
-scripts. Automated suites check the fit inside Rhino 8 by measuring the
-viewports: the shared scale, the centering, the camera targets, the
-construction planes and the grid alignment across views.
+the four named views. Each view keeps its display mode. The options work from
+the prompt, from macros and from scripts. Automated suites check the fit
+inside Rhino 8 by measuring the viewports: the shared scale, the centering,
+the camera targets, the construction planes and the grid alignment across
+views.
 
 Treat every build as an alpha until the checks below are done.
 

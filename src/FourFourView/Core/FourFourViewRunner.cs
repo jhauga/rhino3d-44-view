@@ -38,6 +38,8 @@ namespace FourFourView.Core
         return report;
       }
 
+      // Restoring the layout resets every view's display mode, so record them first.
+      var displayModes = ViewDisplayModes.Capture(doc);
       var views = ViewLayout.EnsureFourViews(doc, options.Layout, out string missing);
       report.LayoutApplied = options.Layout;
       if (views == null)
@@ -46,6 +48,7 @@ namespace FourFourView.Core
         report.Message = "44View: the " + missing + " view is missing. Run -44View with Layout=Yes to restore the four views.";
         return report;
       }
+      displayModes.Apply(views);
 
       var box = measured.Box;
       var extents = new Extents3(box.Max.X - box.Min.X, box.Max.Y - box.Min.Y, box.Max.Z - box.Min.Z);

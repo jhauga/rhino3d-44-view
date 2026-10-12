@@ -81,6 +81,13 @@ gets its standard construction plane: world XY for Top and Perspective, XZ for
 Front and YZ for Right. The four cameras are then saved as named views and
 each viewport shows its own.
 
+## Display modes
+
+Restoring the layout puts every view back in Wireframe. `44View` records the
+display mode of each view first and sets it again right after the layout, so a
+Shaded Top or a Rendered Perspective stays that way. A view that was closed has
+no mode to keep and comes back in Wireframe.
+
 ## Flat parts, curves and points
 
 A side of zero length needs no room, so the other side decides. A curve drawn

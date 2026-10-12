@@ -69,6 +69,7 @@ Type `44View`. The command:
 1. Measures the selected objects, or every visible object when nothing is
    selected.
 2. Restores the four default viewports: Top, Perspective, Front and Right.
+   Each view keeps its display mode, such as Wireframe, Shaded or Rendered.
 3. Fits Top, Front and Right at one shared scale, centered on the model, with
    the margin Rhino's Zoom Extents leaves.
 4. Fits the Perspective view in its default direction.

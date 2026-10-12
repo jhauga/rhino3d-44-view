@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   command. The default padding follows Rhino's Zoom Extents border.
 - Every camera targets the model and gets its view's standard construction
   plane, and each viewport shows its own named view.
+- Each view keeps its display mode, such as Wireframe, Shaded or Rendered,
+  when the four default viewports are restored.
 - Flat parts, curves and single points fit; a point is framed as a one unit
   cube.
 - Scripting object with `Fit`, `FitWith` and a JSON `LastReport`, reachable as

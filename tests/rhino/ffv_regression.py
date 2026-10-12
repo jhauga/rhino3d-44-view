@@ -388,3 +388,55 @@ def layout_off(context):
     after = sorted([str(v.MainViewport.Id) for v in context.doc.Views.GetStandardRhinoViews()])
     h.equal(after, before, "standard views after a fit with Layout off")
     check_fitted(context, report)
+
+
+def check_display_modes(context, wanted, when):
+    for name, mode in sorted(wanted.items()):
+        got = str(h.view(context.doc, name).MainViewport.DisplayMode.EnglishName)
+        h.equal(got, mode, "%s display mode %s" % (name, when))
+
+
+@SUITE.case("each view keeps its display mode, also when the layout is rebuilt")
+def keeps_display_modes(context):
+    doc = context.doc
+    available = dict((str(mode.EnglishName), mode) for mode in Rhino.Display.DisplayModeDescription.GetDisplayModes())
+    wanted = {"Top": "Shaded", "Front": "Ghosted", "Right": "X-Ray", "Perspective": "Rendered"}
+    for mode in wanted.values():
+        h.ok(mode in available, "the %s display mode is not available" % mode)
+
+    before = dict((name, h.view(doc, name).MainViewport.DisplayMode) for name in h.VIEW_NAMES)
+    try:
+        for name, mode in wanted.items():
+            h.view(doc, name).MainViewport.DisplayMode = available[mode]
+        context.pump()
+        outcome = context.run("_44View")
+        h.capture_screen(context, "display-modes")
+        h.equal(outcome["result"], "Success", "44View command result")
+        check_display_modes(context, wanted, "after 44View")
+
+        h.view(doc, "Perspective").Maximized = True
+        context.pump()
+        outcome = context.run("_44View")
+        h.equal(outcome["result"], "Success", "44View command result from a maximized view")
+        h.ok(not h.view(doc, "Perspective").Maximized, "Perspective should no longer be maximized")
+        check_display_modes(context, wanted, "after 44View from a maximized view")
+
+        fit_with(context, "Visible", 10.0, False, False)
+        check_display_modes(context, wanted, "after a fit with Layout off")
+
+        h.ok(h.view(doc, "Right").Close(), "the Right view should close")
+        context.pump()
+        outcome = context.run("_44View")
+        h.equal(outcome["result"], "Success", "44View command result with the Right view closed")
+        reopened = dict(wanted)
+        reopened["Right"] = "Wireframe"
+        check_display_modes(context, reopened, "after 44View with the Right view closed")
+    finally:
+        if [name for name in h.VIEW_NAMES if h.view(doc, name) is None]:
+            doc.Views.FourViewLayout(False)
+            context.pump()
+        for name, mode in before.items():
+            rhino_view = h.view(doc, name)
+            if rhino_view is not None and mode is not None:
+                rhino_view.MainViewport.DisplayMode = mode
+        context.pump()

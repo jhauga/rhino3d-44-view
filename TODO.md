@@ -8,6 +8,7 @@ Task-level tracking for 44 View. Higher-level direction lives in
 - [x] Fit Top, Front and Right at one shared scale, centered on the model
 - [x] Restore the four default viewports, including a closed or maximized view
 - [x] Save and show the named views Perspective, Top, Front and Right
+- [x] Keep each view's display mode when the layout is restored
 - [x] Options in `-44View`, saved as the defaults for `44View`
 - [x] Unit, smoke and regression suites
 - [x] Build a yak package and install it from a local folder
@@ -21,6 +22,8 @@ Task-level tracking for 44 View. Higher-level direction lives in
       camera, and the first presses change nothing visible: applying the
       camera, moving its target and showing the named view each add a history
       entry
+- [ ] Restoring the layout turns a hidden grid back on; only each view's
+      display mode is kept
 - [ ] Views of a non-English Rhino are found by position after the layout;
       that path has not run in a non-English Rhino yet
 - [ ] With `Layout=No` and viewports of different sizes, the views share one
