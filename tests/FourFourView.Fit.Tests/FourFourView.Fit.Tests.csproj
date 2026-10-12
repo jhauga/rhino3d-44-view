@@ -14,7 +14,7 @@
   <ItemGroup>
     <!-- The fit math deliberately has no RhinoCommon dependency, so it compiles straight
          into this test assembly and runs without Rhino installed. Anything under
-         Core/Rhino needs Rhino and is covered by the in-Rhino suites instead. -->
+         Core/Runtime needs Rhino and is covered by the in-Rhino suites instead. -->
     <Compile Include="../../src/FourFourView/Core/Fit/**/*.cs" />
   </ItemGroup>
 
