@@ -61,6 +61,22 @@ def version_matches(context):
     h.equal(str(context.ffv.Version), found.group(1), "plugin version and manifest.yml disagree")
 
 
+@SUITE.case("Rhino reads the plugin icon")
+def plugin_icon(context):
+    import System.Drawing
+    import System.Drawing.Imaging
+    plugin = Rhino.PlugIns.PlugIn.Find(_guid())
+    names = [str(name) for name in plugin.Assembly.GetManifestResourceNames()]
+    h.ok("FourFourView.Resources.FourFourView.ico" in names, "icon resource missing, found %s" % names)
+    bitmap = h.not_none(plugin.Icon(System.Drawing.Size(32, 32)), "PlugIn.Icon at 32 x 32")
+    try:
+        h.equal([bitmap.Width, bitmap.Height], [32, 32], "icon size")
+        bitmap.Save(context.artifact_path("plugin-icon-32.png"), System.Drawing.Imaging.ImageFormat.Png)
+        context.artifact("plugin-icon-32.png", "the plugin icon as Rhino reads it, 32 x 32")
+    finally:
+        bitmap.Dispose()
+
+
 @SUITE.case("44View fits a box and prints its summary line")
 def fits_a_box(context):
     doc = context.doc

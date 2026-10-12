@@ -6,6 +6,10 @@ using System.Runtime.InteropServices;
 [assembly: PlugInDescription(DescriptionType.Organization, "John Haugabook")]
 [assembly: PlugInDescription(DescriptionType.WebSite, "https://github.com/jhauga/rhino3d-44-view")]
 
+// Manifest resource name of the embedded plugin icon:
+// <RootNamespace>.<FolderPath>.<file> per the EmbeddedResource item in the .csproj.
+[assembly: PlugInDescription(DescriptionType.Icon, "FourFourView.Resources.FourFourView.ico")]
+
 [assembly: AssemblyTitle("FourFourView")]
 [assembly: AssemblyDescription("Restores the four default viewports, fits the model in each at one shared scale so the grids line up, and saves the four cameras as named views.")]
 [assembly: AssemblyCompany("John Haugabook")]

@@ -6,7 +6,7 @@ should fail.
 | Suite | Runs in | Needs Rhino | What it proves |
 | --- | --- | --- | --- |
 | `unit` | `dotnet test` | no | The fit math: one shared scale, each view's frame, flat shapes, points and bad input |
-| `smoke` | Rhino | yes | The plugin loads, registers `44View` and fits a model |
+| `smoke` | Rhino | yes | The plugin loads, registers `44View`, shows its icon and fits a model |
 | `regression` | Rhino | yes | The fitted views, measured from the live viewports, for every option and edge case |
 
 ## Running them
